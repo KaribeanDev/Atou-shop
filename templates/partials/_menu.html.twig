@@ -1,0 +1,170 @@
+{# Responsive Menu #}
+<div class="humberger__menu__overlay"></div>
+<div class="humberger__menu__wrapper">
+  <div class="humberger__menu__cart">
+    <ul>
+      <li>
+        <a href="{{ path('app_wishlist_show') }}"><i class="fa fa-heart"></i></a>
+      </li>
+      <li>
+        <a href="{{ path('app_cart') }} ">
+          <i class="fa fa-shopping-bag"></i>
+          <span>
+            {% if app.session.get('fullCart') and app.session.get('fullCart')['data']['quantityCart'] > 0 %}
+              {{ app.session.get('fullCart')['data']['quantityCart'] }}
+            {% else %}
+              0
+            {% endif %}
+          </span>
+        </a>
+      </li>
+    </ul>
+    <div class="header__cart__price">
+      total: <span>
+        {% if app.session.get('fullCart') %}
+          {{ app.session.get('fullCart')['data']['subTotalTtc']|number_format(2) }} €
+        {% else %}
+          0 €
+        {% endif %}
+      </span>
+    </div>
+  </div>
+  <div class="humberger__menu__widget">
+    <div class="header__top__right__auth">
+      {% if app.user %}
+        <a href="{{ path('app_logout') }}"><i class="fa fa-user"></i>Déconnexion</a>
+      {% else %}
+        <a href="{{ path('app_login') }}">
+          <i class="fa fa-user"></i>
+          Connexion
+        </a>
+      {% endif %}
+    </div>
+  </div>
+  <nav class="humberger__menu__nav mobile-menu">
+    <ul>
+      <li class="active">
+        <a href="{{ path('app_home') }} ">Accueil</a>
+      </li>
+      <li>
+        <a href="{{ path('app_product_index') }}?sort=id">Shop</a>
+      </li>
+      <li>
+        <a href="{{ path('app_account') }}">Compte</a>
+        <ul class="header__menu__dropdown">
+          <li>
+            <a href="{{ path('app_address_index') }}">Mes adresses</a>
+          </li>
+          <li>
+            <a href="{{ path('app_order_index') }}">Mon historique de commande</a>
+          </li>
+          <li>
+            <a href="{{ path('app_wishlist_show') }} ">Ma liste de souhait</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="{{ path('app_blog_index') }}">Blog</a>
+      </li>
+      <li>
+        <a href="{{ path('app_contact_new') }}">Contact</a>
+      </li>
+    </ul>
+  </nav>
+  <div id="mobile-menu-wrap"></div>
+  <div class="header__top__right__social">
+    <a href="#"><i class="fa fa-facebook"></i></a>
+    <a href="#"><i class="fa fa-twitter"></i></a>
+    <a href="#"><i class="fa fa-linkedin"></i></a>
+    <a href="#"><i class="fa fa-pinterest-p"></i></a>
+  </div>
+  <div class="humberger__menu__contact">
+    <ul>
+      <li>
+        <i class="fa fa-envelope"></i> hello@colorlib.com
+      </li>
+      <li>Free Shipping for all Order of $99</li>
+    </ul>
+  </div>
+</div>
+{# End of Responsive Menu #}
+
+<header class="header">
+  {% include 'partials/_header.html.twig' %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="header__logo">
+          <a href="./index.html"><img src="#" alt="" /></a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <nav class="header__menu">
+          <ul>
+            <li>
+              <a href="{{ path('app_home') }} ">Accueil</a>
+            </li>
+            <li>
+              <a href="{{ path('app_product_index') }}?sort=id">Shop</a>
+            </li>
+            <li>
+              <a href="{{ path('app_account') }}">Compte</a>
+              <ul class="header__menu__dropdown">
+                <li>
+                  <a href="{{ path('app_address_index') }}">Mes adresses</a>
+                </li>
+                <li>
+                  <a href="{{ path('app_order_index') }}">Mon historique de commande</a>
+                </li>
+                <li>
+                  <a href="{{ path('app_wishlist_show') }} ">Ma liste de souhait</a>
+                </li>
+              </ul>
+            </li>
+            <li class="">
+              <a href="{{ path('app_blog_index') }}">Blog</a>
+            </li>
+            <li>
+              <a href="{{ path('app_contact_new') }}">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-lg-3">
+        <div class="header__cart">
+          <ul>
+            <li>
+              <a href="{{ path('app_wishlist_show') }}"><i class="fa fa-heart"></i></a>
+            </li>
+            <li>
+              <a href="{{ path('app_cart') }} ">
+                <i class="fa fa-shopping-bag"></i>
+                <span>
+                  {% if app.session.get('fullCart') and app.session.get('fullCart')['data']['quantityCart'] > 0 %}
+                    {{ app.session.get('fullCart')['data']['quantityCart'] }}
+                  {% else %}
+                    0
+                  {% endif %}
+                </span>
+              </a>
+            </li>
+          </ul>
+          <div class="header__cart__price">
+            total:
+            <span>
+              {% if app.session.get('fullCart') %}
+                {{ app.session.get('fullCart')['data']['subTotalTtc']|number_format(2) }} €
+              {% else %}
+                0 €
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="humberger__open" id="humberger__open">
+      <i class="fa fa-bars"></i>
+    </div>
+  </div>
+</header>
+{% include "partials/_addFlash.html.twig" %}

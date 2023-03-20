@@ -1,0 +1,18 @@
+
+<form method="post" action="{{ path('app_search') }}">
+    {{ form_row(form.search) }}
+    <input type="submit" value="search">
+</form>
+
+
+
+{% if products|length == 0 %}
+  <p>Aucun produit trouvé.</p>
+{% else %}
+  <ul>
+    {% for product in products %}
+      <li>{{ product.productName }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+

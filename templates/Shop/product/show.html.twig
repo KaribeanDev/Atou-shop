@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.productName }} - Feuilles médicinales | Atoumo{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="{{ product.productDescription }}">
+    <meta name="keywords" content="feuilles médicinales, phytothérapie, herboristerie, plantes médicinales, achat en ligne, bio, qualité supérieure, livraison rapide">
+{% endblock %}
+
+{% block body %}
+  <!-- Product Details Section Begin -->
+  <section class="product-details spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="product__details__pic">
+            <div class="product__details__pic">
+              <img class="#" src="/assets/images/upload/products/{{ product.image }}" alt="{{ product.productName }}" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="product__details__text">
+            <h3>{{ product.productName }}</h3>
+            <div class="product__details__price">{{ product.productprice / 100 }} €</div>
+            <p>{{ product.productDescription|raw }}</p>
+
+            <div class="product__details">
+              <div class="quantity">
+              </div>
+            </div>
+            <a href="{{ path('app_cart_add', { id: product.id }) }}" class="primary-btn">ADD TO CARD</a>
+            <ul>
+              <li>
+                <b>En stock</b> <span>{{ product.quantity }}</span>
+              </li>
+              <li>
+                <b>Envoyer en</b> <span> 1 jour ouvré <samp></samp></span>
+              </li>
+              <li>
+                <b>Poids</b> <span>0.5 kg</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

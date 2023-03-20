@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Ma liste de souhaits - Feuilles médicinales | Atoumo
+{% endblock %}
+
+{% block body %}
+  <section class="shoping-cart spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="shoping__cart__table">
+            <table>
+              <thead>
+                <tr>
+                  <th class="shoping__product">Produits</th>
+                  <th>Prix</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if wishList %}
+                  {% for wishListItem in wishList %}
+                    <tr>
+                      <td class="shoping__cart__item">
+                      <a href="{{ path('app_product_show', { id: wishListItem.product.id, product: wishListItem.product.slug }) }}">
+                        <img src="/assets/images/upload/products/{{ wishListItem.product.image }}" alt="{{ wishListItem.product.productName }}" />
+                      </a>
+                        <h5>{{ wishListItem.product.productName }}</h5>
+                      </td>
+                      <td class="shoping__cart__price">{{ wishListItem.product.productPrice / 100 }} €</td>
+                      <td class="shoping__cart__item__close">
+                        <a href="{{ path('wishlist_delete', { productId: wishListItem.product.id }) }}"><i class="fa-solid fa-trash"></i></a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                {% else %}
+                  <tr>
+                    <td colspan="5" class="text-center">Votre liste de souhaits est vide</td>
+                  </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

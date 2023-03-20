@@ -1,0 +1,35 @@
+
+{% block content %}
+  <h1>Order Details</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in order.productOrder %}
+        <tr>
+          <td>{{ product.productName }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.productPrice }}</td>
+          <td>
+            <a href="{{ path('admin_edit_product', { id: product.id }) }}">Edit</a>
+            <a href="{{ path('admin_delete_product', { id: product.id }) }}" onclick="return confirm('Are you sure?')">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p>Total Price: {{ order.orderPrice }}</p>
+  <p>Discount: {{ order.discount }}</p>
+  <p>Full Price: {{ order.fullPrice }}</p>
+  <p>Carrier: {{ order.carrier }}</p>
+  <p>Quantity: {{ order.orderQuantity }}</p>
+  <p>Address: {{ order.addresses }}</p>
+  <p>Created at: {{ order.createdAt }}</p>
+  <a href="{{ path('admin_orders') }}">Back to Orders</a>
+{% endblock %}

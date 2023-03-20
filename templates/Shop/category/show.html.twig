@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Categories - Feuilles médicinales | Atoumo
+{% endblock %}
+
+{% block body %}
+  <section class="product-details spad">
+    <div class="container">
+      <div class="row">
+        {# <div class="col-lg-6 col-md-6">
+          <div class="product__details__pic">
+            <div class="product__details__pic__item">
+              <img class="product__details__pic__item--large" src="img/product/details/product-details-1.jpg" alt="" />
+            </div>
+            <div class="product__details__pic__slider owl-carousel">
+              {% for products in category.product|slice(- 5, 5) %}
+                <img src="/assets/images/upload/products/{{ products.image }}" alt="{{ products.productName }}" />
+              {% endfor %}
+            </div>
+          </div> #}
+        {# </div> #}
+        <div class="">
+          <div class="product__details__text">
+            <h3>{{ category.catName }}</h3>
+            <p>{{ category.catDescription|raw }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="related-product">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-title related__product__title">
+            <h2>Produits de la catégorie : {{ category.catName }}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        {% for products in category.product %}
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="product__item">
+              <div class="product__item__pic set-bg" style="background-image: url(/assets/images/upload/products/{{ products.image }})">
+                <ul class="product__item__pic__hover">
+                  <li>
+                    <a href="{{ path('wishlist_add', { productId: products.id }) }}"><i class="fa fa-heart"></i></a>
+                  </li>
+                  <li>
+                    <a href="{{ path('app_product_show', { id: products.id, product: products.slug }) }}"><i class="fa fa-eye"></i></a>
+                  </li>
+                  <li>
+                    <a href="{{ path('app_cart_add', { id: products.id }) }}"><i class="fa fa-shopping-cart"></i></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="product__item__text">
+                <h6><a href="#">{{ products.productName }}</a></h6>
+                <h5>{{ products.productPrice / 100 }} €</h5>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

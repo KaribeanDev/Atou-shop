@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Mon Panier - Feuilles médicinales | Atoumo
+{% endblock %}
+
+{% block body %}
+  <section class="shoping-cart spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="shoping__cart__table">
+            <table>
+              <thead>
+                <tr>
+                  <th class="shoping__product">Produits</th>
+                  <th>Prix</th>
+                  <th>Quantité</th>
+                  <th>Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if app.session.get('cart') %}
+                  {% for element in cart.product %}
+                    <tr>
+                      <td class="shoping__cart__item">
+                        <img src="/assets/images/upload/products/{{ element.product.image }}" alt="{{ element.product.productName }}" />
+                        <h5>{{ element.product.productName }}</h5>
+                      </td>
+                      <td class="shoping__cart__price">
+                        {% if element.discountPrice %}
+                          {{ element.discountPrice|number_format(2) }}€
+                        {% else %}
+                          {{ element.product.productPrice / 100 }}€
+                        {% endif %}
+                      </td>
+
+                      <td class="shoping__cart__quantity">
+                        <a href="{{ path('app_cart_remove', { id: element.product.id }) }}"><i class="fa-solid fa-minus"></i></a>
+                        {{ element.quantity }}
+                        <a href="{{ path('app_cart_add', { id: element.product.id }) }} "><i class="fa-solid fa-plus"></i></a>
+                      </td>
+                      <td class="shoping__cart__total">
+                        {% if element.discountPrice %}
+                          {{ element.quantity * (element.discountPrice|number_format(2)) }}
+                        {% else %}
+                          {{ element.quantity * element.product.productPrice / 100 }}
+                        {% endif %}€
+                        <a href="{{ path('app_cart_delete', { id: element.product.id }) }}"><i class="fa-solid fa-trash"></i></a>
+                      </td>
+                      <td class="shoping__cart__item__close">
+                        <span class="icon_close"></span>
+                      </td>
+                    </tr>
+                  {% else %}
+                    <tr>
+                      <td colspan="5" class="text-center">Votre panier est vide</td>
+                    </tr>
+                  {% endfor %}
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="shoping__cart__btns">
+            <a href="{{ path('app_product_index') }}?sort=id" class="primary-btn cart-btn">CONTINUER SHOPPING</a>
+            <a href="{{ path('app_cart_delete_all') }}" class="primary-btn cart-btn cart-btn-right">
+              <span class="icon_loading"></span>
+              VIDER PANIER
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="shoping__continue">
+            <div class="shoping__discount">
+              <h5></h5>
+              {# <form action="#">
+                                <input type="text" placeholder="Enter your coupon code">
+                                <button type="submit" class="site-btn">APPLY COUPON</button>
+                            </form> #}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="shoping__checkout">
+            <h5>Panier Total</h5>
+            <ul>
+              <li>
+                Sous Total
+                <span>{{ cart.data.subTotal }} €</span>
+              </li>
+              <li>
+                T.V.A
+                <span>{{ cart.data.taxe }} €</span>
+              </li>
+              <li>
+                Total
+                <span>
+                  {{ cart.data.subTotalTtc|number_format(2) }}
+                  €
+                </span>
+              </li>
+            </ul>
+            <a href="{{ path('app_checkout') }}" class="primary-btn">VALIDER</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

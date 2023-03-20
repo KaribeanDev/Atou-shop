@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Commandes - Feuilles médicinales | Atoumo
+{% endblock %}
+
+{% block body %}
+  <h1>Votre Commande</h1>
+
+  <a href="{{ path('app_order_index') }}" class="btn btn-secondary mb-3">Vos Commandes</a>
+
+<section class="product-details spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__pic">
+          <div class="product__details__pic__item">
+            <img class="product__details__pic__item--large" src="img/product/details/product-details-1.jpg" alt="" />
+          </div>
+          <div class="product__details__pic__slider owl-carousel">
+            {% for detail in order.orderDetails %}
+              <img src="/assets/images/upload/products/{{ detail.product.image }}" alt="" />
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__text">
+          <h3>Commande N°{{ order.id }}</h3>
+          {% if order.status is defined %}
+            <p>Status: {{ order.status|default('En attente de prise en charge') }}</p>
+          {% endif %}
+          <table class="table">
+            <tbody>
+              {% for detail in order.orderDetails %}
+                <tr>
+                  <td>{{ detail.product.productName }}</td>
+                  {% if detail.product.discount %}
+                    <td>{{ detail.product.discountPrice }}€</td>
+                  {% else %}
+                    <td>{{ detail.product.productPrice / 100 }}€</td>
+                  {% endif %}
+                  <td>X {{ detail.quantity }}</td>
+                </tr>
+              {% endfor %}
+              <tr>
+                <td colspan="2">
+                  <strong>Total</strong>
+                </td>
+                <td>
+                  <strong>{{ order.fullPrice }}€</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

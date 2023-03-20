@@ -1,0 +1,6 @@
+# easy_admin:
+#   entities:
+#     User:
+#       class: App\Entity\User
+#       new:
+#         prePersist: App\Controller\Admin\UserAdminController::setRoles

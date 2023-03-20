@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Ajouter une adresse - Feuilles médicinales | Atoumo
+{% endblock %}
+
+{% block body %}
+  <h1>Nouvelle adresse</h1>
+
+  {{ form_start(form) }}
+  <div class="checkout__form">
+    <form action="#">
+      <div class="row">
+        <div class="col-lg-8 col-md-6">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="checkout__input">
+                <p>
+                  {{ form_label(form.fullname) }}
+                  <span>*</span>
+                </p>
+                {{ form_widget(form.fullname) }}
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="checkout__input">
+                <p>
+                  {{ form_label(form.company) }}
+                  <span>*</span>
+                </p>
+                {{ form_widget(form.company) }}
+              </div>
+            </div>
+          </div>
+          <div class="checkout__input">
+            <p>
+              {{ form_label(form.street) }}
+              <span>*</span>
+            </p>
+            {{ form_widget(form.street) }}
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="checkout__input">
+                <p>
+                  {{ form_label(form.zipCode) }}
+                  <span>*</span>
+                </p>
+                {{ form_widget(form.zipCode) }}
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="checkout__input">
+                <p>
+                  {{ form_label(form.city) }}
+                  <span>*</span>
+                </p>
+                {{ form_widget(form.city) }}
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="checkout__input">
+              <p>
+                {{ form_label(form.contry) }}
+                <span>*</span>
+              </p>
+              {{ form_widget(form.contry) }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="site-btn">Valider</button>
+      {{ form_widget(form._token) }}
+    </form>
+  </div>
+
+  {{ form_end(form) }}
+  {% if app.session.flashbag.has('address_message') %}
+    <div class="alert alert-success">{{ app.session.flashbag.get('address_message')[0] }}</div>
+  {% endif %}
+{% endblock %}

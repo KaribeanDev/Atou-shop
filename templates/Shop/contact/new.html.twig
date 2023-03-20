@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - Feuilles médicinales | Atoumo{% endblock %}
+
+{% block body %}
+        <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_phone"></span>
+                        <h4>Téléphone</h4>
+                        <p>01.41.41.41.41</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_pin_alt"></span>
+                        <h4>Adresse</h4>
+                        <p>558 avenue Anatole France</p>
+                        <p>77190 Dammary Les Lys</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_mail_alt"></span>
+                        <h4>Email</h4>
+                        <p>hello@colorlib.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section End -->
+
+    <!-- Map Begin -->
+    <div class="map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2642.6082665503377!2d2.6457192159180933!3d48.52157373231625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5f1686120e0ff%3A0x65ae8e4b4306cf4c!2s558%20Av.%20Anatole%20France%2C%2077190%20Dammarie-les-Lys!5e0!3m2!1sfr!2sfr!4v1673650782181!5m2!1sfr!2sfr"
+            height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        {# <div class="map-inside">
+            <i class="icon_pin"></i>
+            <div class="inside-widget">
+                <h4>77190 Dammary Les Lys</h4>
+                <ul>
+                    <li>558 avenue Anatole France</li>
+                    <li>Téléphone: 01.41.41.41.41</li>
+                </ul>
+            </div>
+        </div> #}
+    </div>
+    <!-- Map End -->
+
+
+    {{ include('Shop/contact/_form.html.twig') }}
+
+{% endblock %}

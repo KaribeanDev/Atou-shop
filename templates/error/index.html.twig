@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Hello ErrorController!
+{% endblock %}
+
+{% block body %}
+  <head>
+    <title>Error</title>
+  </head>
+  <body>
+    <h1>An error occurred</h1>
+    <p>{{ exception.message }}</p>
+    <p>
+      Return to <a href="{{ path('home') }}">homepage</a>.
+    </p>
+  </body>
+{% endblock %}

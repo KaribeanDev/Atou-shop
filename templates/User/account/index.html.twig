@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Compte - Feuilles médicinales | Atoumo
+{% endblock %}
+
+{% block body %}
+  <section class="checkout spad">
+    <div class="container">
+      <div class="checkout__form">
+        <h4>Profil</h4>
+          <div class="row">
+            <div class="col-lg-8 col-md-6">
+              <div class="row">
+                <div>
+                  <div class="col-lg-6">
+                    <div class="checkout__input">
+                      <p>Mes informations :</p>
+                      <div>Identité : {{ user }}</div>
+                      <div>Pseudo : {{ user.pseudo }}</div>
+                      <div>Inscrit depuis le : {{ user.createdAt|date('d-m-Y') }}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <a href="{{ path('app_address_index') }}" class="site-btn my-3">Voir mes adresses</a>
+                    <a href="{{ path('app_order_index') }}" class="site-btn my-3">Voir mes commandes</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="checkout__order">
+                <h4>Commandes</h4>
+                <div class="checkout__order__products">
+                  Nombre de commande <span></span>
+                </div>
+                <ul>
+                  <li>{{ orderCount }} commande éffectuée(s)</li>
+                </ul>
+                <div class="checkout__order__subtotal">
+                  <a href="{{ path('app_wishlist_show') }}" class="site-btn my-3">Voir ma liste de souhaits</a>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

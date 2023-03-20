@@ -1,0 +1,25 @@
+  {# AddFlash Wishlist #}
+  {% for message in app.flashes('addWishlist') %}
+    <div class="alert alert-success">{{ message }}</div>
+  {% endfor %}
+
+  
+    {# AddFlash Address #}
+  {% for message in app.flashes('address_message') %}
+    <div class="alert alert-success">{{ message }}</div>
+  {% endfor %}
+
+  {# AddFlash Cart #}
+  {% for message in app.flashes('addCart') %}
+    <div class="alert alert-success">{{ message }}</div>
+  {% endfor %}
+
+
+  {# AddFlash Checkout #}
+  {% for message in app.flashes('checkout_message') %}
+    <div class="alert alert-success">{{ message }}</div>
+  {% endfor %}
+
+  {% for message in app.flashes('error') %}
+    <div class="alert alert-success">{{ message }}</div>
+  {% endfor %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Mes adresses - Feuilles médicinales | Atoumo
+{% endblock %}
+
+{% block body %}
+
+  <div class="checkout__form d-flex justify-content-center">
+    <form action="#">
+      <div class="row">
+        <div class="col-lg-8 col-md-6">
+          <h4>Vos adresses</h4>
+          <a href="{{ path('app_address_new') }}" class="site-btn my-3">Ajouter une adresse</a>
+          <div class="row">
+            {% for address in addresses %}
+              <div class="col-lg-6 my-3">
+                <div class="card">
+                  <div class="card-body card-body-large">
+                    <h5 class="card-title">{{ address.fullname }}</h5>
+                    <p>{{ address.company }}</p>
+                    <p>{{ address.street }}</p>
+                    <p>{{ address.zipCode }} {{ address.city }}</p>
+                    <p>{{ address.contry }}</p>
+                    <div class="d-flex">
+                      <form action="{{ path('app_address_delete', { id: address.id }) }}" method="POST">
+                        <button type="submit" class="btn btn-danger" name="_token" value="{{ csrf_token('delete' ~ address.id) }}">Supprimer</button>
+                      </form>
+                      <a href="{{ path('app_address_edit', { id: address.id }) }}" class="btn btn-primary mr-2">Modifier</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}

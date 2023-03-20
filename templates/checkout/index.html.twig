@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Validation du panier - Feuilles médicinales | Atoumo
+{% endblock %}
+
+{% block body %}
+  <section class="checkout spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h6><span class="icon_tag_alt"></span> Vous voulez ajouter une adresse <a href="{{ path('app_address_new') }}">Cliquez ici</a></h6>
+        </div>
+      </div>
+      <div class="checkout__form">
+        <h4>Sélectionnez une adresse</h4>
+        <form action="valid" id="checkout-form" method="post">
+          {{ form_start(checkout) }}
+
+          <div class="row">
+            <div class="col-lg-8 col-md-6">
+              <div class="row">
+                {% for address in checkout.addresses %}
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="deliveryAddress" id="{{ address.vars.id }}" value="{{ address.vars.value }}" onchange="document.getElementById('deliveryAddress').value = this.value;" />
+                    <label class="form-check-label" for="{{ address.vars.id }}">{{ address.vars.label }}</label>
+                  </div>
+                  {% if loop.index is divisible by(3) %}
+                    <div class="clearfix"></div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <div class="col-lg-8 col-md-6">
+                <div class="row">
+                  <div class="checkout__input">
+                    <h4>Transporteur</h4>
+                    <select id="carrier-select" onchange="calculateTotal()" name="carrier_id">
+                      <option value="Transporteur">Sélectionner votre transporteur</option>
+                      {% for carrier in carriers %}
+                        <option value="{{ carrier.id }}" data-carrier-price="{{ carrier.CarrierPrice }}">{{ carrier.carrierName }} {{ carrier.CarrierPrice / 100 }}€</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+              <!-- Dans votre template -->
+              <div class="checkout__order">
+                <h4>Votre Commande</h4>
+                <div class="checkout__order__products">
+                  Articles <span>Total</span>
+                </div>
+                {% for element in cart.product %}
+                  <ul>
+                    <li>
+                      {{ element.product.productName }}
+                      X
+                      {{ element.quantity }}
+                      <span>{{ element.product.productPrice / 100 }} €</span>
+                    </li>
+                  </ul>
+                {% endfor %}
+
+                <div class="checkout__order__subtotal">
+                  Total HT <span>{{ cart.data.subTotal }} €</span>
+                  <div class="text-align text-rigth">
+                    <ul>
+                      <li>
+                        T.V.A <span>{{ cart.data.taxe }} €</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="checkout__order__subtotal">
+                  Transporteur<span id="carrier-price">{{ carrierPrice }} €</span>
+                </div>
+                <div class="checkout__order__total">
+                  Total TTC <span id="total-price">{{ cart.data.subTotalTtc|number_format(2) }} €</span>
+                </div>
+                <input type="hidden" id="subtotalttc" value="{{ cart.data.subTotalTtc }}" />
+                <button type="submit" class="site-btn">PASSER LA COMMANDE</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}

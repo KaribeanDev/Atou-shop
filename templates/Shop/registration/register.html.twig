@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Register
+{% endblock %}
+
+{% block body %}
+  <section class="checkout spad">
+    <div class="container" >
+      <div class="row">
+        <div class="col-lg-12">
+          <h6>
+            <span class="icon_tag_alt"></span>
+            Vous avez un compte ?
+            <a href="{{ path('app_login') }}">Cliquez ici</a>
+            pour vous connecter
+          </h6>
+        </div>
+      </div>
+      <div class="checkout__form" style="text-align: center ;">
+        <h4>S'inscrire</h4>
+        {{ form_start(registrationForm) }}
+        <form action="app_register">
+          <div class="row">
+            <div class="col-lg-8 col-md-6">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="checkout__input">{{ form_row(registrationForm.pseudo) }}</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="checkout__input">{{ form_row(registrationForm.firstname) }}</div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="checkout__input">{{ form_row(registrationForm.lastname) }}</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="checkout__input">{{ form_row(registrationForm.email) }}</div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="checkout__input">{{ form_row(registrationForm.plainPassword, { label: 'Mot de passe' }) }}</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="checkout__input" >{{ form_row(registrationForm.birthdate) }}</div>
+                </div>
+                  {{ form_widget(registrationForm._token) }}
+                <button type="submit" class="site-btn">S'INSCRIRE</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        {{ form_end(registrationForm) }}
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,77 @@
+<!-- Latest Product Section Begin -->
+<section class="latest-product spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6">
+        <div class="latest-product__text">
+          <h4>Derniers Produits</h4>
+          <div class="latest-product__slider owl-carousel">
+            {% for product in products %}
+              <div class="latest-product__slider__item">
+                <a href="{{ path('app_product_show', { id: product.id, product: product.slug }) }}" class="latest-product__item">
+                  <div class="latest-product__item__pic">
+                    <img src="/assets/images/upload/products/{{ product.image }}" alt="{{ product.productName }}" />
+                  </div>
+                  <div class="latest-product__item__text">
+                    <h6>{{ product.productName }}</h6>
+                    <span>{{ product.productPrice / (100 | format('%,.3f')) }} €</span>
+                  </div>
+                </a>
+              </div>
+              
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-4 col-md-6">
+        <div class="latest-product__text">
+          <h4>Les promotions</h4>
+          <div class="latest-product__slider owl-carousel">
+            {% for key, product in discountProduct %}
+              <div class="latest-product__slider__item">
+                <a href="{{ path('app_product_show', { id: product.id, product: product.slug }) }}" class="latest-product__item">
+                  <div class="latest-product__item__pic">
+                    <img src="/assets/images/upload/products/{{ product.image }}" alt="{{ product.productName }}" />
+                  </div>
+                  <div class="latest-product__item__text">
+                    <h6>{{ product.productName }}</h6>
+                    <div class="product__discount__percent">-{{ product.discount }}%</div>
+                    <span>
+                    {{ product.discountPrice|number_format(2) }} €
+                    <s>{{ product.productPrice / (100 | format('%,.3f')) }} €</s>
+                    </span>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-4 col-md-6">
+        <div class="latest-product__text">
+          <h4>Les plus vus</h4>
+          <div class="latest-product__slider owl-carousel">
+            {% for product in prodMostViewed %}
+              <div class="latest-product__slider__item">
+                <a href="{{ path('app_product_show', { id: product.id, product: product.slug }) }}" class="latest-product__item">
+                  <div class="latest-product__item__pic">
+                    <img src="/assets/images/upload/products/{{ product.image }}" alt="{{ product.productName }}" />
+                  </div>
+                  <div class="latest-product__item__text">
+                    <h6>{{ product.productName }}</h6>
+                    <span>{{ product.productPrice / 100 }} €</span>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Latest Product Section End -->
